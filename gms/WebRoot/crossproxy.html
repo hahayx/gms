@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <title></title>
+  <script type="text/javascript" src="http://www.100bt.com/resource/js/lib/jquery-mig-min.js"></script>
+  <script src="http://resource.a0bi.com/resource/js/lib/json2.js"></script>
+  <script type="text/javascript">
+  function getQuerys(str, key) {
+    if (str) {
+      var keyReg = new RegExp("(?:^|&)" + key + "(?:[=]?)(.*?)(?=&|$)", "i"),
+        commonReg = new RegExp("(?:^|&)(.+?)(?=&|$)", "gi"),
+        objects = {},
+        j, w;
+      if (key) {
+        j = keyReg.exec(str);
+        return j ? j[1] : null;
+      } else {
+        while (w = commonReg.exec(str)) {
+          var s = w[1].match(/(^[a-zA-Z0-9_-]+?)=(.*)/);
+          if (s) {
+            objects[$.trim(s[1])] = s[2]
+          } else {
+            objects[$.trim(w[1])] = ""
+          }
+        }
+        return objects
+      }
+    } else {
+      return {}
+    }
+  }
+  if(!/100bt\.com$/.test(location.host)){
+    location.href="http://resource.a0bi.com/resource/image/a.gif";
+  }
+  var param=getQuerys(location.search.substring(1));
+  try{
+  var action=param.action,data=JSON.parse(window.name),method=param.method,redirUrl=param.redirUrl,id=param.id;
+  $[method](action,data,$.noop,'json').done(function(data){
+    window.name=JSON.stringify(data);
+    location.href=redirUrl+"?id="+id
+  }).fail(function(){
+    window.name=data;
+    location.href=redirUrl
+  });
+  }catch(e){}
+</script>
+</head>
+<body>
+
+</body>
+</html>
