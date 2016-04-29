@@ -18,8 +18,14 @@
 		<location>/error.html</location>
 	</error-page>	
 
-  <!-- 301-->
-
+  <!-- 
+  原来是非纯springMVC架构才要加下面这个东西，默认会自动加载springmvc-servlet
+  <context-param>
+		<param-name>contextConfigLocation</param-name> 
+		<param-value>classpath*:applicationContext.xml</param-value>
+	</context-param>
+  -->
+	
 
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
@@ -31,9 +37,14 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<listener>
+	 	<listener-class>com.hh.common.servlet.GmsListener</listener-class>
+	 </listener>
+ <!-- 
 	 <listener>
 	 	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	 </listener>
+	 -->
 	
 	<session-config>
 		<session-timeout>300</session-timeout>
