@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+
+<config>
+	<db>
+		<name>gms</name>
+		<driver>gms</driver>
+		<connection>gms</connection>
+	</db>
+	
+</config>
