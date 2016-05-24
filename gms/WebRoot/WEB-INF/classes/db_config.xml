@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+	<db>
+		<name>gms</name>
+		<driver>com.mysql.jdbc.Driver</driver>
+		<connection>jdbc:mysql://qdm203823661.my3w.com/qdm203823661_db?autoReconnect=true&amp;user=qdm203823661&amp;password=hahasql</connection>
+	</db>
+</config>
