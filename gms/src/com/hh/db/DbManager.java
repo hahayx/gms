@@ -48,7 +48,8 @@ public class DbManager {
 	public static void init(String confPath) throws Exception{
 		InputStream in = new FileInputStream(confPath);
 		Document doc = XmlUtil.getDoc(in);
-		List<Node> list = XmlUtil.getChildNodes((Node)doc, "db");
+		Node root = XmlUtil.getRootNode(doc);
+		List<Node> list = XmlUtil.getChildNodes(root, "db");
 		dbs = new HashMap<String, DbManager>();
 		for (Node node : list) {
 			String name = XmlUtil.getFirstChildNode(node, "name").getTextContent();
@@ -76,8 +77,8 @@ public class DbManager {
 		}
 
 		ds.setJdbcUrl(connInfo.connectionString);
-		ds.setMinPoolSize(3);
-		ds.setMaxPoolSize(20);
+		ds.setMinPoolSize(5);
+		ds.setMaxPoolSize(40);
 		ds.setCheckoutTimeout(3000);
 		ds.setIdleConnectionTestPeriod(2);
 		ds.setMaxIdleTime(2);

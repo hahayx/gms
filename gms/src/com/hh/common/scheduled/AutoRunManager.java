@@ -114,7 +114,7 @@ public class AutoRunManager {
 			long periodSecs = 0;
 			boolean repeat = false;
 			TimeUnit timeunit = TimeUnit.SECONDS;
-			boolean checkServerId = false;// 判断是否是当前的服务器作为计划任务的承载
+
 
 			// 通过注解进行参数指定的,若同时实现了@{ScheduledAble}接口,则接口会被忽略
 			beginTime = ra.beginTime();
