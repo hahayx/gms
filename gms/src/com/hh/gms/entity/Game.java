@@ -4,6 +4,18 @@ import java.util.Date;
 
 public class Game {
 
+	public static final String GameId = "GameId";
+	public static final String GameName = "GameName";
+	public static final String PlayUrl = "PlayUrl";
+	public static final String Logo = "Logo";
+	public static final String Imgs = "Imgs";
+	public static final String CreatTime = "CreatTime";
+	public static final String Power = "Power";
+	public static final String GameType = "GameType";
+	public static final String Intro = "Intro";
+	public static final String Mark = "Mark";
+	public static final String VerifyStatus = "VerifyStatus";
+
 	private int gameId;
 	private String gameName;
 	private String playUrl;
@@ -14,6 +26,8 @@ public class Game {
 	private int gameType;
 	private String intro;
 	private int mark;
+	private int verifyStatus;
+	
 	public int getGameId() {
 		return gameId;
 	}
@@ -73,6 +87,12 @@ public class Game {
 	}
 	public void setMark(int mark) {
 		this.mark = mark;
+	}
+	public int getVerifyStatus() {
+		return verifyStatus;
+	}
+	public void setVerifyStatus(int verifyStatus) {
+		this.verifyStatus = verifyStatus;
 	}
 	
 	
