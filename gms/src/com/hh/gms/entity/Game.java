@@ -11,7 +11,6 @@ public class Game {
 	public static final String Imgs = "Imgs";
 	public static final String CreatTime = "CreatTime";
 	public static final String Power = "Power";
-	public static final String GameType = "GameType";
 	public static final String Intro = "Intro";
 	public static final String Mark = "Mark";
 	public static final String VerifyStatus = "VerifyStatus";
@@ -23,7 +22,6 @@ public class Game {
 	private String imgs;
 	private Date creatTime;
 	private int power;
-	private int gameType;
 	private String intro;
 	private int mark;
 	private int verifyStatus;
@@ -69,12 +67,6 @@ public class Game {
 	}
 	public void setPower(int power) {
 		this.power = power;
-	}
-	public int getGameType() {
-		return gameType;
-	}
-	public void setGameType(int gameType) {
-		this.gameType = gameType;
 	}
 	public String getIntro() {
 		return intro;

@@ -19,4 +19,16 @@ public class GameController {
 		return new ModelAndView("game/list").addObject("list", GameService.list(param));
 	}
 	
+	@RequestMapping("/insertOrUpdate")
+	public MapData insertOrUpdate(HttpServletRequest req) {
+		MapData param = ServletUtil.getParams(req);
+		return GameService.updateOrInsert(param);
+	}
+	
+	@RequestMapping("/game")
+	public static ModelAndView game(int gameId) {
+		
+		return new ModelAndView("game/game").addObject("game", GameService.getGame(gameId));
+	}
+	
 }

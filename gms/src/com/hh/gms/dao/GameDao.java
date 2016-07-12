@@ -2,6 +2,7 @@ package com.hh.gms.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.hh.db.DbException;
@@ -28,7 +29,6 @@ public class GameDao {
 			game.setImgs(rs.getString(Game.Imgs));
 			game.setCreatTime(rs.getDate(Game.CreatTime));
 			game.setPower(rs.getInt(Game.Power));
-			game.setGameType(rs.getInt(Game.GameType));
 			game.setIntro(rs.getString(Game.Intro));
 			game.setVerifyStatus(rs.getInt(Game.VerifyStatus));
 			return game;
@@ -45,9 +45,22 @@ public class GameDao {
 				addInsertField(Game.Imgs, game.getImgs()).
 				addInsertField(Game.CreatTime, game.getCreatTime()).
 				addInsertField(Game.Power, game.getPower()).
-				addInsertField(Game.GameType, game.getGameType()).
 				addInsertField(Game.Intro, game.getIntro()).
 				addInsertField(Game.VerifyStatus, game.getVerifyStatus())) > 0;
+	}
+	
+	public static boolean update(Game game) throws DbException {
+		List<Field> updateFields = new ArrayList<Field>();
+		updateFields.add(new Field(Game.GameName, game.getGameName()));
+		updateFields.add(new Field(Game.PlayUrl, game.getPlayUrl()));
+		updateFields.add(new Field(Game.Logo, game.getLogo()));
+		updateFields.add(new Field(Game.Imgs, game.getImgs()));
+		updateFields.add(new Field(Game.Intro, game.getIntro()));
+		updateFields.add(new Field(Game.CreatTime, game.getCreatTime()));
+		updateFields.add(new Field(Game.Power, game.getPower()));
+		updateFields.add(new Field(Game.Mark, game.getMark()));
+		updateFields.add(new Field(Game.VerifyStatus, game.getPower()));
+		return update(game.getGameId(), updateFields);
 	}
 	
 	public static boolean update(int gameId,List<Field> updateFields) throws DbException {
@@ -63,6 +76,7 @@ public class GameDao {
 	
 	public static List<Game> selectList(List<Field> whereFields,int offset,int limit) throws DbException {
 		return DbUtil.getInstance(db).selectList(new SqlInputData(table,offset,limit).
+				addOrderField(Game.Power,"desc").
 				addWhereField(whereFields), builder);
 	}
 	
