@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>gms用到的标签库</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>gms</short-name>
+	<uri>/gms</uri>
+	<function>
+		<description>获取分页url根据分页的index</description>
+		<name>getPageUrl</name>
+		<function-class>com.hh.common.utils.Taglib</function-class>
+		<function-signature>java.lang.String getPageUrl(java.lang.String,java.lang.Object)</function-signature>
+	</function>
+	<function>
+		<description>获取分页的页数</description>
+		<name>getPageNum</name>
+		<function-class>com.hh.common.utils.Taglib</function-class>
+		<function-signature>int getPageNum(int,int)</function-signature>
+	</function>
+	<function>
+		<description>获取当前分页</description>
+		<name>getCurPage</name>
+		<function-class>com.hh.common.utils.Taglib</function-class>
+		<function-signature>int getCurPage(int,int)</function-signature>
+	</function>
+	
+</taglib>

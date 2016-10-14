@@ -19,18 +19,34 @@ public class GameService {
 	private static Logger logger = LoggerFactory.getLogger(GameService.class);
 	
 	public static List<Game> list(MapData param) {
-		int verifyStatus = param.getInt("verifyStatus",0);
+		int cid = param.getInt("cid",0);
 		int offset = param.getInt("offset");
 		int limit = param.getInt("limit", 30);
 		List<Field> whereFields = new ArrayList<Field>();
-		if (verifyStatus != -1) {
-			whereFields.add(new Field(Game.VerifyStatus, verifyStatus));
+		if (cid != 0) {
+			whereFields.add(new Field(Game.Cid,"&",1<<cid));
 		}
+		param.set("cid", cid).set("offset", offset).set("limit", limit);
 		try {
 			return GameDao.selectList(whereFields, offset, limit);
 		} catch (DbException e) {
+			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			return Collections.emptyList();
+		}
+	}
+	
+	public static int count(MapData param) {
+		int cid = param.getInt("cid",0);
+		List<Field> whereFields = new ArrayList<Field>();
+		if (cid != 0) {
+			whereFields.add(new Field(Game.Cid,"&",1<<cid));
+		}
+		try {
+			return GameDao.count(whereFields);
+		} catch (DbException e) {
+			logger.error(e.getMessage(), e);
+			return 0;
 		}
 	}
 	
@@ -45,8 +61,9 @@ public class GameService {
 			game.setPlayUrl(param.getString("playUrl"));
 			game.setMark(param.getInt("mark"));
 			game.setPower(param.getInt("power"));
-			game.setCreatTime(new Date());
+			game.setCid(param.getInt("cid"));
 			if (game.getGameId() == 0) {
+				game.setCreatTime(new Date());
 				GameDao.insert(game);
 			}else {
 				GameDao.update(game);

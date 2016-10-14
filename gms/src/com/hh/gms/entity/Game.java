@@ -14,6 +14,7 @@ public class Game {
 	public static final String Intro = "Intro";
 	public static final String Mark = "Mark";
 	public static final String VerifyStatus = "VerifyStatus";
+	public static final String Cid = "Cid";
 
 	private int gameId;
 	private String gameName;
@@ -25,6 +26,7 @@ public class Game {
 	private String intro;
 	private int mark;
 	private int verifyStatus;
+	private int cid;
 	
 	public int getGameId() {
 		return gameId;
@@ -86,8 +88,12 @@ public class Game {
 	public void setVerifyStatus(int verifyStatus) {
 		this.verifyStatus = verifyStatus;
 	}
-	
-	
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
 	
 	
 }
