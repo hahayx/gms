@@ -8,3 +8,4 @@
 
 <link rel="stylesheet" type="text/css"	href="/css/jquery-ui-1.8.17.custom.css" />
 <link rel="stylesheet" href="/css/pagination.css" />
+<link rel="stylesheet" href="/css/common.css" />

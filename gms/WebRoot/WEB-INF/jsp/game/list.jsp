@@ -6,24 +6,11 @@
 <title>指挥中心</title>
 <%@ include file="/common/pubScript.jsp"%>
 <style>
-th,legend{
-	font-weight:bold;
-}
-hr{margin:1em 0;}
-/*Table!!!!*/
-caption,tr,th {
-	text-align:center;
-}
-th,td {
-	/*borders and padding to make the table readable*/
-	border:1px solid #000;
-	padding:.5em;
-}
-table {border-collapse: collapse;border-spacing: 0;}
+
 </style>
 </head>
 	<body>
-		
+		<a class="btn" href="/game/game.html">添加</a>
 	<table>
 		<tr>
 			<td>游戏名</td>

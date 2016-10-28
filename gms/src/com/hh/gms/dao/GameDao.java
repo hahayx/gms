@@ -29,6 +29,7 @@ public class GameDao {
 			game.setImgs(rs.getString(Game.Imgs));
 			game.setCreatTime(rs.getDate(Game.CreatTime));
 			game.setPower(rs.getInt(Game.Power));
+			game.setMark(rs.getInt(Game.Mark));
 			game.setCid(rs.getInt(Game.Cid));
 			game.setIntro(rs.getString(Game.Intro));
 			game.setVerifyStatus(rs.getInt(Game.VerifyStatus));
@@ -62,7 +63,7 @@ public class GameDao {
 		updateFields.add(new Field(Game.Power, game.getPower()));
 		updateFields.add(new Field(Game.Cid, game.getCid()));
 		updateFields.add(new Field(Game.Mark, game.getMark()));
-		updateFields.add(new Field(Game.VerifyStatus, game.getPower()));
+		updateFields.add(new Field(Game.VerifyStatus, game.getVerifyStatus()));
 		return update(game.getGameId(), updateFields);
 	}
 	

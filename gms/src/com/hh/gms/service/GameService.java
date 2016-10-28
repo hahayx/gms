@@ -21,7 +21,7 @@ public class GameService {
 	public static List<Game> list(MapData param) {
 		int cid = param.getInt("cid",0);
 		int offset = param.getInt("offset");
-		int limit = param.getInt("limit", 30);
+		int limit = param.getInt("limit", 10);
 		List<Field> whereFields = new ArrayList<Field>();
 		if (cid != 0) {
 			whereFields.add(new Field(Game.Cid,"&",1<<cid));
