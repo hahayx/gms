@@ -46,6 +46,14 @@ public class SpdUtil {
 		tagMap.put(0, all);
 		for (Integer tid : tMap.keySet()) {
 			List<MapData> tagList = tagMap.get(tagMap);
+			int limit = 12;
+			for (int pn = 0; pn*limit < tagList.size(); pn++) {
+				MapData model = new MapData();
+				model.set("pn", pn+1);
+				model.set("tid", tid);
+				model.set("tagName", tMap.get(tid));
+				model.set("list", WebUtil.getCachePager(pn*limit, limit, tagList));
+			}
 			
 		}
 		
