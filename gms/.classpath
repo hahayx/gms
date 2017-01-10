@@ -10,8 +10,6 @@
 	<classpathentry kind="lib" path="lib/apache_commons/commons-dbcp-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/apache_commons/commons-fileupload-1.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/apache_commons/commons-io-2.1.jar"/>
-	<classpathentry kind="lib" path="lib/apache_commons/commons-lang-2.3.jar"/>
-	<classpathentry kind="lib" path="lib/apache_commons/commons-lang3-3.0.jar"/>
 	<classpathentry kind="lib" path="lib/apache_commons/commons-pool-1.6.jar"/>
 	<classpathentry kind="lib" path="lib/httpclient/commons-httpclient-3.1.jar"/>
 	<classpathentry kind="lib" path="lib/httpclient/httpclient-4.2.3.jar"/>
@@ -51,11 +49,24 @@
 	<classpathentry kind="lib" path="lib/slf4j/jcl-over-slf4j-1.6.4.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j/log4j-over-slf4j-1.6.4.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j/pja-slf4j-log4j12-1.6.4.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j/slf4j-api-1.6.4.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j/slf4j-jdk14-1.6.4.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j/slf4j-log4j12-1.6.4.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j/slf4j-simple-1.6.4.jar"/>
 	<classpathentry kind="lib" path="lib/ant.jar"/>
+	<classpathentry kind="lib" path="lib/commons-jexl-2.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/concurrentlinkedhashmap-lru-1.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/parboiled-java-1.1.7.jar"/>
+	<classpathentry kind="lib" path="lib/pegdown-1.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/jade4j-1.2.5.jar"/>
+	<classpathentry kind="lib" path="lib/apache_commons/commons-lang3-3.4.jar"/>
+	<classpathentry kind="lib" path="lib/antlr-2.7.5.jar"/>
+	<classpathentry kind="lib" path="lib/avalon-logkit-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="lib/servletapi-2.3.jar"/>
+	<classpathentry kind="lib" path="lib/werken-xpath-0.9.4.jar"/>
+	<classpathentry kind="lib" path="lib/velocity-1.7.jar"/>
+	<classpathentry kind="lib" path="lib/apache_commons/commons-lang-2.4.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
