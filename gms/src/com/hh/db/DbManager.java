@@ -77,9 +77,9 @@ public class DbManager {
 		}
 
 		ds.setJdbcUrl(connInfo.connectionString);
-		ds.setMinPoolSize(5);
-		ds.setMaxPoolSize(40);
-		ds.setCheckoutTimeout(3000);
+		ds.setMinPoolSize(10);
+		ds.setMaxPoolSize(50);
+		ds.setCheckoutTimeout(6000);
 		ds.setIdleConnectionTestPeriod(2);
 		ds.setMaxIdleTime(2);
 		ds.setPreferredTestQuery("SELECT 1");

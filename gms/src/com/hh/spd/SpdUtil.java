@@ -40,9 +40,11 @@ public class SpdUtil {
 		List<MapData> all = new ArrayList<MapData>();
 		Map<Integer, String> tMap = new HashMap<Integer, String>();
 		Map<Integer, List<MapData>> tagMap = new HashMap<Integer, List<MapData>>();
+		SiteMapUtil.init();
+		SiteMapUtil.add("http://www.hahayx.com/xcx/", "1.0");
 		for (Object obj : list) {
 			MapData d = new MapData((Map)obj);
-			JadeUtil.generateStaticFile("G:/jiang/code/git2/wxyx/wxyx/jade/content.jade", String.format("/home/spd/xcx-%s.html", d.getInt("id")), d);
+			//JadeUtil.generateStaticFile("G:/jiang/code/git2/wxyx/wxyx/jade/content.jade", String.format("/home/spd/xcx/xcx-%s.html", d.getInt("id")), d);
 			List<Object> tags = d.getList("tag");
 			for (Object t : tags) {
 				int tid = WebUtil.toInt(ELUtil.getValue(t, "id"));
@@ -75,7 +77,9 @@ public class SpdUtil {
 				model.set("list", WebUtil.getCachePager(pn*limit, limit, tagList));
 				model.set("tMap", tMap);
 				model.set("arr", getArr(arr, pn));
-				JadeUtil.generateStaticFile("G:/jiang/code/git2/wxyx/wxyx/jade/list.jade", String.format("/home/spd/tag-%s-%s.html", tid,pn+1), model);
+				//JadeUtil.generateStaticFile("G:/jiang/code/git2/wxyx/wxyx/jade/list.jade", String.format("/home/spd/xcx/tag-%s-%s.html", tid,pn+1), model);
+				System.out.println(String.format("http://www.hahayx.com/tag-%s-%s.html", tid,pn+1));
+				SiteMapUtil.add(String.format("http://www.hahayx.com/xcx/tag-%s-%s.html", tid,pn+1),"0.8");
 			}
 			
 		}
@@ -87,14 +91,18 @@ public class SpdUtil {
 			model.set("list", all);
 			model.set("tMap", tMap);
 			model.set("arr",new int[]{0});
-			JadeUtil.generateStaticFile("G:/jiang/code/git2/wxyx/wxyx/jade/list.jade", "/home/spd/all.html", model);
+			//JadeUtil.generateStaticFile("G:/jiang/code/git2/wxyx/wxyx/jade/list.jade", "/home/spd/xcx/all.html", model);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		for (MapData d : all) {
-			download(d);
-			save(d);
+			System.out.println(String.format("http://www.hahayx.com/xcx-%s.html", d.getInt("id")));
+			SiteMapUtil.add2(String.format("http://www.hahayx.com/xcx/xcx-%s.html", d.getInt("id")),"0.6");
+		//	download(d);
+		//	save(d);
 		}
+		//SiteMapUtil.create("/home/spd/sitemap.xml");
+		
 	}
 	
 	private static int[] getArr(int[] arr ,int i) {
