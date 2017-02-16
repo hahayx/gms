@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 注意 <property> 一旦定义了一个 name-value, 之后 value 就不能改了, 因此建议除了 conf 之外每个 <target> 中的 property name 以 target name 作开头 -->
+<project name="pja">
+
+	<target name="conf">
+		<property file="local.properties" />
+		<property name="source.dir" value="G:/jiang/code/git/gms" />
+		<property name="build.dir" value="G:/jiang/code/git/build" />
+		<property name="lib.dir" value="G:/jiang/code/git/gms/lib" />
+		
+		<!--build出来的jar包路径-->
+		<property name="debug" value="on" />
+		<property name="optimize" value="on" />
+		<property name="deprecation" value="on" />
+		
+		<fileset dir="${lib.dir}" id="libs"/>
+	</target>
+	<!-- ******************** (* jar 包 ******************** -->
+
+	<target name="gms" depends="conf">
+
+		<property name="source.base.dir" value="${source.dir}" />
+		<property name="source.java.dir" value="${source.base.dir}/src" />
+		<property name="dest.base.dir" value="${build.dir}/gms" />
+		<property name="dest.class.dir" value="${dest.base.dir}/classes" />
+		<property name="dest.lib.dir" value="${dest.base.dir}/lib" />
+
+		<delete dir="${dest.base.dir}" />
+		<mkdir dir="${dest.base.dir}" />
+
+		<!-- (* 编译 -->
+		<mkdir dir="${dest.class.dir}" />
+		<path id="lib_classpath">
+			<pathelement path="${jsdk_home}/lib" />			
+			<fileset refid="libs" />
+		</path>
+		<path id="need_copy_jar_path">	
+			<fileset dir="${lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${lib.dir}/apache_commons"/>
+			<fileset dir="${lib.dir}/httpclient"/>
+			<fileset dir="${lib.dir}/jdbc"/>
+			<fileset dir="${lib.dir}/json"/>
+			<fileset dir="${lib.dir}/slf4j"/>
+			<fileset dir="${lib.dir}/spring3.2.8"/>
+			<fileset dir="${lib.dir}/xstream"/>
+		</path>
+		<javac srcdir="${source.java.dir}" encoding="UTF-8" destdir="${dest.class.dir}" debug="${debug}" optimize="${optimize}">
+			<classpath refid="lib_classpath" />
+		</javac>
+		<!-- *) -->
+		
+		<copy todir="${dest.lib.dir}" overwrite="true">
+			<path>					
+				<path refid="need_copy_jar_path" />
+			</path>
+		</copy>
+
+	</target>
+
+	
+</project>
