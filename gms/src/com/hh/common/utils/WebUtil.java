@@ -2,6 +2,8 @@ package com.hh.common.utils;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +28,9 @@ import org.codehaus.jackson.JsonParser.Feature;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.hh.common.data.MapData;
+import com.hh.db.ResultObjectBuilder;
+import com.hh.db.ScalarResultBuilder;
+
 
 
 
@@ -517,4 +522,15 @@ public class WebUtil {
 		return false;
 	}
 	
+	public static final ResultObjectBuilder<MapData> LowerCaseMapDataBuilder = new ResultObjectBuilder<MapData>() {
+		@Override
+		public MapData build(ResultSet rs) throws SQLException {
+			Map<String, Object> res=new HashMap<String, Object>();
+			for (Entry<String, Object> i : ScalarResultBuilder.objectMapBuilder.build(rs).entrySet()) {
+				String key = i.getKey();
+				res.put(firstToLowerCase(key),i.getValue());
+			}
+			return new MapData(res);
+		}
+	};
 }

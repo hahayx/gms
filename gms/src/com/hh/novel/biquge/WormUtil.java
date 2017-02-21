@@ -1,7 +1,8 @@
 package com.hh.novel.biquge;
 
 import java.io.File;
-import java.util.Date;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +14,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.hh.common.data.MapData;
 import com.hh.common.utils.DateUtils;
 import com.hh.common.utils.IOUtil;
+import com.hh.common.utils.WebUtil;
 import com.hh.db.DbException;
 import com.hh.db.util.DbUtil;
 import com.hh.db.util.SqlInputData;
@@ -70,6 +72,48 @@ public class WormUtil {
 				addUpdateField("LastChapterName", book.getString("lastChapterName")).
 				addUpdateField("LastChapterIndex", book.getInt("lastChapterIndex")).
 				addUpdateField("UpdateTime", DateUtils.parseDateYDM(book.getString("time"))));
+	}
+	
+	
+	public static List<MapData> getUpdateList(int limit) {
+		try {
+			return DbUtil.getInstance("novel").selectList(new SqlInputData("Novel",0,limit).
+					addOrderField("UpdateTime", "desc"),WebUtil.LowerCaseMapDataBuilder);
+		} catch (DbException e) {
+			e.printStackTrace();
+			return Collections.emptyList();
+		}
+	}
+	
+	public static List<MapData> novelList(int bookType) {
+		try {
+			return DbUtil.getInstance("novel").selectList(new SqlInputData("Novel").
+					addWhereField("BookType", bookType).
+					addOrderField("UpdateTime", "desc"),WebUtil.LowerCaseMapDataBuilder);
+		} catch (DbException e) {
+			e.printStackTrace();
+			return Collections.emptyList();
+		}
+	}
+	
+	public static List<MapData> finishList() {
+		try {
+			return DbUtil.getInstance("novel").selectList(new SqlInputData("Novel").
+					addWhereField("BookStatus", 2).
+					addOrderField("UpdateTime", "desc"),WebUtil.LowerCaseMapDataBuilder);
+		} catch (DbException e) {
+			e.printStackTrace();
+			return Collections.emptyList();
+		}
+	}
+	
+	public static List<MapData> allList() {
+		try {
+			return DbUtil.getInstance("novel").selectList(new SqlInputData("Novel"),WebUtil.LowerCaseMapDataBuilder);
+		} catch (DbException e) {
+			e.printStackTrace();
+			return Collections.emptyList();
+		}
 	}
 	
 }
