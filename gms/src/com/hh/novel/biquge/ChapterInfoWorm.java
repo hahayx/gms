@@ -4,8 +4,8 @@ import com.hh.common.data.MapData;
 
 public class ChapterInfoWorm {
 
-	private static final String contentReg = "<div id=\"nr1\">([\\D\\d]+?)</div>";
-	private static final String nameReg = "id=\"nr_title\"[^>]*>([\\D\\d]+?)</div>";
+	private static final String contentReg = "<div id=\"content\">([\\D\\d]+?)<script";
+	private static final String nameReg = "<h1>([\\D\\d]+?)</h1>";
 	
 	public static MapData getChapterInfo(String url) {
 		try {

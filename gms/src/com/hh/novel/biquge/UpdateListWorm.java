@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class UpdateListWorm {
 	
-	private static final String url ="http://www.biquge.com";
+	private static final String url ="http://www.biquge.tw";
 	private static final String beginTag = "最近更新小说列表";
 	private static final String endTag = "最新入库小说";
 	private static final String urlReg = "<a href=\"/((\\d+)_(\\d+))/\"";
@@ -23,7 +23,7 @@ public class UpdateListWorm {
 			Pattern p = Pattern.compile(urlReg);
 			Matcher m = p.matcher(html);
 			while (m.find()) {
-				list.add(String.format("http://m.biquge.com/%s/", m.group(1)));
+				list.add(String.format("http://m.biquge.tw/%s/", m.group(1)));
 			}
 			return list;
 		} catch (Exception e) {

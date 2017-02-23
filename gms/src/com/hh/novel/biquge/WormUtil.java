@@ -1,6 +1,10 @@
 package com.hh.novel.biquge;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -114,6 +118,28 @@ public class WormUtil {
 			e.printStackTrace();
 			return Collections.emptyList();
 		}
+	}
+	
+	public static List<String> readFileToList(String filePath) {
+		File file = new File(filePath);
+		List<String> list = new ArrayList<String>();
+		try {
+			if(file.isFile() && file.exists()){
+				InputStreamReader read = new InputStreamReader(
+		        new FileInputStream(file),"utf-8");//考虑到编码格式
+		        BufferedReader bufferedReader = new BufferedReader(read);
+		        String lineTxt = null;
+		        while((lineTxt = bufferedReader.readLine()) != null){
+		           list.add(lineTxt);
+		        }
+		        read.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
 	}
 	
 }
