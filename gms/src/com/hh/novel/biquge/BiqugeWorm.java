@@ -7,6 +7,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.velocity.Template;
+
 import com.hh.common.data.MapData;
 import com.hh.common.utils.VelocityUtil;
 import com.hh.common.utils.WebUtil;
@@ -18,6 +20,8 @@ public class BiqugeWorm {
 	private static String chapterPath ;
 	private static String coverPath ;
 	private static String vmPath ;
+	private static Template contentTemp;
+	private static Template bookTemp;
 	
 	public static void doUpdate() {
 		List<String> urls = UpdateListWorm.getUpdateList();
@@ -41,7 +45,7 @@ public class BiqugeWorm {
 	
 	public static void doAll() {
 		List<String> urls = WormUtil.readFileToList(vmPath+"/tw.csv");
-		ThreadPoolExecutor executor =  new ThreadPoolExecutor(5, 5,0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+		ThreadPoolExecutor executor =  new ThreadPoolExecutor(2,3,0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 		System.out.println(urls.size());
 		for (String url : urls) {
 			executor.submit(new WormRun(url));
@@ -71,9 +75,7 @@ public class BiqugeWorm {
 			book.set("lastChapterName", last.getString("name"));
 			book.set("lastChapterIndex", chapters.size());
 			book.set("chapters", chapters);
-			VelocityUtil.generateStaticFile(vmPath+"book.vm", String.format(bookPath, book.getInt("bookId")), book);
 			int i = 1;
-			/*
 			for (MapData c : chapters) {
 				i++;
 				try {
@@ -81,14 +83,18 @@ public class BiqugeWorm {
 						continue;
 					}
 					MapData chapter = ChapterInfoWorm.getChapterInfo(c.getString("url"));
+					chapter.set("bookName", book.getString("bookName"));
+					chapter.set("bookId", book.getString("bookId"));
 					chapter.set("index", i-1);
-					VelocityUtil.generateStaticFile(vmPath+"content.vm", String.format(chapterPath, book.getInt("bookId"),i-1), chapter);
+					chapter.set("size", chapters.size());
+					VelocityUtil.generateStaticFile(contentTemp, String.format(chapterPath, book.getInt("bookId"),i-1), chapter);
 				} catch (Exception e) {
 					// TODO: handle exception
 				}	
 			}
-			*/
+			VelocityUtil.generateStaticFile(bookTemp, String.format(bookPath, book.getInt("bookId")), book);
 			if (!WormUtil.isExistFile(String.format(coverPath, book.getInt("bookId")))) {
+				
 				WormUtil.download(book.getString("img"), String.format(coverPath, book.getInt("bookId")));
 			}
 			if (WormUtil.isExistNovel(book.getInt("bookId"))) {
@@ -109,6 +115,9 @@ public class BiqugeWorm {
 	public static void doTypeList() {
 		for (int i = 1; i <= 8; i++) {
 			List<MapData> list =  i != 8 ? WormUtil.novelList(i) : WormUtil.finishList();
+			for (MapData book : list) {
+				book.set("info", WormUtil.toSimpleDesc(book.getString("info"), 60));
+			}
 			String type = typeMap.get(i);
 			int count = list.size();
 			int limit = 20;
@@ -149,10 +158,12 @@ public class BiqugeWorm {
 	
 	private static void init(String vmPath,String htmlPath) throws Exception {
 		DbManager.init("/tmp/config2.xml");
-		bookPath = htmlPath+"%s/index.html";
+		bookPath = htmlPath+"book-%s/index.html";
 		chapterPath = htmlPath+"book-%s\\%s.html";
 		coverPath = htmlPath+"cover\\%s.jpg";
 		BiqugeWorm.vmPath = vmPath;
+		contentTemp = VelocityUtil.createTemplate(vmPath+"content.vm");
+		bookTemp = VelocityUtil.createTemplate(vmPath+"book.vm");
 		typeMap.put(1,"玄幻奇幻");
 		typeMap.put(2,"武侠仙侠");
 		typeMap.put(3,"都市言情");
@@ -164,8 +175,8 @@ public class BiqugeWorm {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		//init(args[0], args[1]);
-		init("G:\\home\\biquge\\", "G:\\home\\biquge\\xs\\");
+		init(args[0], args[1]);
+		//init("G:\\jiang\\code\\git2\\web\\web\\", "G:\\home\\biquge\\xs\\");
 		doAll();
 	}
 }

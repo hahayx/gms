@@ -41,7 +41,19 @@ public class WormUtil {
 		return null;
 	}
 	
+	public static String getRegVal(String html,Pattern reg,int group){
+		Matcher m = reg.matcher(html);
+		if (m.find()) {
+			return m.group(group);
+		}
+		return null;
+	}
+	
 	public static void download(String url,String path) throws Exception{
+		File destFile = new File(path);
+		if (!destFile.getParentFile().exists()){
+			destFile.getParentFile().mkdirs();
+		}
 		HttpClient httpClient = new DefaultHttpClient();;
 		HttpGet http = new HttpGet(url);
 		HttpResponse response = httpClient.execute(http);
@@ -137,9 +149,18 @@ public class WormUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return list;
 		
+	}
+	
+	public static String toSimpleDesc(String desc,int limit) {
+		desc = desc.replace("<br/>", "");
+		desc = desc.replace("&nbsp;", "");
+		desc = desc.replaceAll("\\p{Space}", "");
+		if (desc.length() > limit) {
+			desc = desc.substring(0, limit);
+		}
+		return desc;
 	}
 	
 }
